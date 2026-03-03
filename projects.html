@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Alice Burtey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #111113;
+      --surface:   #18181b;
+      --surface2:  #1f1f23;
+      --border:    rgba(255,255,255,0.07);
+      --amber:     #c47a3a;
+      --amber-dim: rgba(196,122,58,0.13);
+      --blue:      #4a90b8;
+      --blue-dim:  rgba(74,144,184,0.13);
+      --green:     #5a9e72;
+      --green-dim: rgba(90,158,114,0.13);
+      --red:       #b85a5a;
+      --text:      #dddad4;
+      --muted:     #64615c;
+      --soft:      #9b9791;
+      --display:   'Outfit', system-ui, sans-serif;
+      --body:      'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--body); font-weight: 300;
+      line-height: 1.65; overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 58px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px;
+      background: rgba(17,17,19,0.93); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--display); font-size: 1.05rem; font-weight: 600;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-right { display: flex; align-items: center; gap: 32px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+    .nav-back {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--amber); }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 56px; }
+    .page-header { padding: 110px 0 60px; }
+    .eyebrow {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .eyebrow::after { content: ''; flex: 0 0 28px; height: 1px; background: var(--amber); opacity: 0.4; }
+    h1.page-title {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300; letter-spacing: -0.02em; line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    h1.page-title span { color: var(--amber); font-weight: 600; }
+    .page-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.9; max-width: 560px; }
+
+    /* ── PROJECT LIST ── */
+    .projects-section { padding-bottom: 96px; }
+    .project-block { margin-bottom: 72px; }
+    .pb-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 24px; margin-bottom: 28px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pb-meta {}
+    .pb-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--amber); background: var(--amber-dim);
+      border: 1px solid rgba(196,122,58,0.2);
+      padding: 3px 10px; border-radius: 3px; margin-bottom: 10px;
+    }
+    .pb-title {
+      font-family: var(--display); font-size: 1.5rem; font-weight: 600;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .pb-company { font-size: 0.75rem; font-weight: 500; color: var(--soft); letter-spacing: 0.04em; }
+    .pb-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .pb-tool {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 3px;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--soft);
+    }
+    .pb-links { display: flex; gap: 10px; flex-shrink: 0; margin-top: 4px; }
+    .pb-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 8px 16px; border-radius: 4px; text-decoration: none; transition: all 0.2s;
+    }
+    .pb-link.primary { background: var(--amber); color: #fff; }
+    .pb-link.primary:hover { background: #d08840; }
+    .pb-link.ghost { border: 1px solid var(--border); color: var(--soft); }
+    .pb-link.ghost:hover { border-color: var(--amber); color: var(--amber); }
+
+    .pb-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.9; margin-bottom: 32px; max-width: 720px; }
+    .pb-desc strong { color: var(--soft); font-weight: 500; }
+
+    /* ── DASHBOARD SHELL ── */
+    .dashboard {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+    }
+    .dash-topbar {
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .dash-title { font-family: var(--display); font-size: 0.88rem; font-weight: 600; color: var(--text); }
+    .dash-subtitle { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+    .dash-subtitle span { color: var(--amber); }
+    .dash-controls { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .dash-btn {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 4px; border: 1px solid var(--amber);
+      background: var(--amber-dim); color: var(--amber); cursor: pointer; transition: all 0.15s;
+      font-family: var(--body);
+    }
+    .dash-btn:hover { background: var(--amber); color: #fff; }
+    .week-pills { display: flex; gap: 4px; }
+    .week-pill {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.06em;
+      padding: 3px 8px; border-radius: 3px; border: 1px solid var(--border);
+      color: var(--muted); background: var(--surface2);
+    }
+    .dash-week-pills { display: flex; gap: 4px; }
+    .dash-week-pills .week-pill.active { border-color: rgba(196,122,58,0.3); color: var(--amber); background: var(--amber-dim); }
+
+    .dash-body { padding: 20px; }
+
+    /* MAIN GRID */
+    .dq-main-grid {
+      display: grid; grid-template-columns: 1fr 320px;
+      gap: 16px; align-items: start;
+    }
+
+    .dq-panel-title {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--soft); margin-bottom: 12px;
+    }
+    .dq-hint { font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; font-size: 0.65rem; }
+
+    /* COCKPIT TABLE */
+    .cockpit-wrap { overflow-x: auto; border-radius: 6px; border: 1px solid var(--border); }
+    .cockpit-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+    .cockpit-table thead tr { background: var(--surface2); }
+    .cockpit-table th {
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); padding: 9px 10px; text-align: right; white-space: nowrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .cockpit-table th:first-child,
+    .cockpit-table th:nth-child(2),
+    .cockpit-table th:nth-child(3) { text-align: left; }
+    .cockpit-table td { padding: 7px 10px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .cockpit-table td:first-child,
+    .cockpit-table td:nth-child(2),
+    .cockpit-table td:nth-child(3) { text-align: left; }
+    .cockpit-table tr:last-child td { border-bottom: none; }
+    .cockpit-table tr.grand-total td { font-weight: 600; color: var(--text); background: var(--surface2); border-bottom: 1px solid var(--border); }
+    .cockpit-table tr.data-row:hover { background: rgba(255,255,255,0.02); }
+    .cockpit-table tr.selected { background: rgba(196,122,58,0.08); }
+    .cockpit-table tr.selected td { color: var(--text); }
+
+    /* clickable cells */
+    .cell-val {
+      cursor: pointer; border-radius: 3px; padding: 2px 5px; margin: -2px -5px;
+      transition: background 0.15s, color 0.15s; display: inline-block;
+    }
+    .cell-val:hover { background: rgba(196,122,58,0.2); color: var(--amber); }
+    .cell-val.highlighted { background: rgba(196,122,58,0.25); color: var(--amber); font-weight: 600; }
+    .cell-val.dimmed { color: rgba(255,255,255,0.15); }
+
+    /* criticality badges */
+    .crit { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.06em; padding: 1px 6px; border-radius: 3px; }
+    .crit.high   { background: rgba(184,90,90,0.15);  color: #b85a5a; }
+    .crit.medium { background: rgba(196,122,58,0.15); color: var(--amber); }
+    .crit.low    { background: rgba(90,158,114,0.15); color: #5a9e72; }
+
+    /* domain badge */
+    .dom { font-size: 0.62rem; font-weight: 600; color: var(--soft); }
+
+    /* SITE BARS */
+    .site-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; min-height: 120px; }
+    .site-row { display: flex; align-items: center; gap: 10px; }
+    .site-name { font-size: 0.72rem; color: var(--soft); width: 70px; flex-shrink: 0; text-align: right; }
+    .site-bar-track { flex: 1; height: 18px; background: rgba(255,255,255,0.04); border-radius: 3px; overflow: hidden; }
+    .site-bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, #3a7a5c, #5a9e72);
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+      min-width: 2px;
+    }
+    .site-bar-fill.warn { background: linear-gradient(90deg, #8a5a20, var(--amber)); }
+    .site-bar-fill.bad  { background: linear-gradient(90deg, #7a3a3a, #b85a5a); }
+    .site-count { font-size: 0.72rem; font-weight: 600; color: var(--text); width: 36px; flex-shrink: 0; }
+
+    /* ERROR DETAIL */
+    .error-detail {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 7px; padding: 16px;
+      animation: fadeUp 0.3s ease both;
+    }
+    .ed-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .ed-id { font-family: var(--display); font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .ed-name { font-size: 0.82rem; font-weight: 600; color: var(--amber); margin-bottom: 10px; line-height: 1.4; }
+    .ed-def-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .ed-def { font-size: 0.78rem; color: var(--soft); line-height: 1.7; margin-bottom: 12px; }
+    .ed-meta { display: flex; flex-direction: column; gap: 5px; }
+    .ed-meta-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+    .ed-meta-val { font-size: 0.75rem; color: var(--soft); }
+
+    .error-placeholder {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; padding: 28px 16px; text-align: center;
+      border: 1px dashed rgba(255,255,255,0.06); border-radius: 7px;
+    }
+    .ep-icon { font-size: 1.2rem; color: var(--muted); }
+    .ep-text { font-size: 0.75rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── PLACEHOLDER PROJECT ── */
+    .project-placeholder {
+      border: 1.5px dashed rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 48px;
+      text-align: center; color: var(--muted);
+    }
+    .project-placeholder .ph-icon { font-size: 2rem; margin-bottom: 14px; opacity: 0.3; }
+    .project-placeholder p { font-size: 0.84rem; line-height: 1.8; }
+    .project-placeholder strong { color: var(--soft); font-weight: 500; }
+
+    @media (max-width: 860px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .container { padding: 0 20px; }
+      .kpi-row { grid-template-columns: 1fr 1fr; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .charts-grid-2 { grid-template-columns: 1fr; }
+      .pb-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Alice <span>Burtey</span></a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#education">Education</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <a href="index.html" class="nav-back">← Back to portfolio</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <div class="eyebrow">Portfolio — Projects</div>
+    <h1 class="page-title">Selected <span>work</span></h1>
+    <p class="page-desc">
+      A selection of data and analytics projects — interactive dashboards, ETL pipelines and reporting systems built across different industries. Pease note that the data shown is illustrative and AI generated.
+    </p>
+  </div>
+
+  <div class="projects-section">
+
+    <!-- ══════════════════════════════════════════
+         PROJECT 1 — SUPPLY CHAIN DASHBOARD
+    ══════════════════════════════════════════ -->
+    <div class="project-block">
+      <div class="pb-header">
+        <div class="pb-meta">
+          <div class="pb-tag">Supply Chain · BI</div>
+          <div class="pb-title">Global Supply Chain Performance Dashboard</div>
+          <div class="pb-company">Schneider Electric · Budapest · 2023–2025</div>
+          <div class="pb-tools">
+            <span class="pb-tool">Tableau</span>
+            <span class="pb-tool">SQL</span>
+          </div>
+        </div>
+        <div class="pb-links">
+          <a href="index.html#contact" class="pb-link primary">Contact me →</a>
+        </div>
+      </div>
+
+      <p class="pb-desc">
+        Designed and maintained a BI platform to monitor <strong>industrial performance and data quality</strong> across Schneider Electric's global supply chain. The dashboard consolidated data from multiple ERPs across European sites, enabling site managers to track KPIs in real time and identify bottlenecks. Automated weekly reporting replaced manual process that previously took 4+ hours per site.
+      </p>
+
+      <!-- INTERACTIVE DASHBOARD -->
+      <div class="dashboard">
+        <div class="dash-topbar">
+          <div class="dash-title-wrap">
+            <div class="dash-title">Data Quality Rule Errors — Supply Chain · Europe</div>
+            <div class="dash-subtitle">Weekly refresh · Illustrative data · <span id="active-filter-label">All error types</span></div>
+          </div>
+          <div class="dash-controls">
+            <button class="dash-btn" id="reset-btn" onclick="resetFilter()" style="display:none">✕ Clear filter</button>
+            <div class="dash-week-pills">
+              <span class="week-pill active">W1</span>
+              <span class="week-pill active">W2</span>
+              <span class="week-pill active">W3</span>
+              <span class="week-pill active">W4</span>
+              <span class="week-pill active">W5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-body">
+          <div class="dq-main-grid">
+
+            <!-- LEFT: Cockpit table -->
+            <div class="dq-left">
+              <div class="dq-panel-title">Cockpit <span class="dq-hint">— click a value to filter</span></div>
+              <div class="cockpit-wrap">
+                <table class="cockpit-table" id="cockpit-table">
+                  <thead>
+                    <tr>
+                      <th>Control ID</th>
+                      <th>Domain</th>
+                      <th>Criticality</th>
+                      <th>W1</th>
+                      <th>W2</th>
+                      <th>W3</th>
+                      <th>W4</th>
+                      <th>W5</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cockpit-body"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- RIGHT: Site repartition + detail -->
+            <div class="dq-right">
+              <div class="dq-panel-title">Repartition by Site <span class="dq-hint">— filtered on selection</span></div>
+              <div class="site-bars" id="site-bars"></div>
+
+              <!-- Error detail panel -->
+              <div class="error-detail" id="error-detail" style="display:none">
+                <div class="ed-header">
+                  <span class="ed-id" id="ed-id"></span>
+                  <span class="ed-crit" id="ed-crit"></span>
+                </div>
+                <div class="ed-name" id="ed-name"></div>
+                <div class="ed-def-label">Definition</div>
+                <div class="ed-def" id="ed-def"></div>
+                <div class="ed-meta">
+                  <div><span class="ed-meta-label">Domain</span><span class="ed-meta-val" id="ed-domain"></span></div>
+                  <div><span class="ed-meta-label">Owner</span><span class="ed-meta-val" id="ed-owner"></span></div>
+                  <div><span class="ed-meta-label">Resolution</span><span class="ed-meta-val" id="ed-resolution"></span></div>
+                </div>
+              </div>
+
+              <div class="error-placeholder" id="error-placeholder">
+                <div class="ep-icon">←</div>
+                <div class="ep-text">Click any value in the cockpit to see the error breakdown by site and its description</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PROJECT 2 — PLACEHOLDER
+    ══════════════════════════════════════════ -->
+    <div class="project-block">
+      <div class="pb-header">
+        <div class="pb-meta">
+          <div class="pb-tag">Operations · Automation</div>
+          <div class="pb-title">Ops Automation — Heetch</div>
+          <div class="pb-company">Heetch · Paris · 2022</div>
+          <div class="pb-tools">
+            <span class="pb-tool">Python</span>
+            <span class="pb-tool">SQL</span>
+            <span class="pb-tool">Tableau</span>
+          </div>
+        </div>
+      </div>
+      <p class="pb-desc">
+        Designed data tools and automated processes to improve <strong>operational reliability and profitability</strong> for Heetch across France and international markets. Created department-facing dashboards to track key operational KPIs in real time.
+      </p>
+      <div class="project-placeholder">
+        <div class="ph-icon">📈</div>
+        <p><strong>Interactive visualization coming soon.</strong><br/>This section will include an interactive dashboard built with real project data.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         ADD YOUR PROJECT HERE
+    ══════════════════════════════════════════ -->
+    <div class="project-block">
+      <div class="project-placeholder">
+        <div class="ph-icon">＋</div>
+        <p><strong>Add your next project here.</strong><br/>Duplicate one of the project blocks above, update the title, description, tools and link — then add your own chart or visualization.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer style="padding: 20px 56px; border-top: 1px solid var(--border); display:flex; justify-content:space-between;">
+  <span style="font-size:0.68rem;color:var(--muted);">© 2025 Alice Burtey</span>
+  <a href="index.html" style="font-size:0.68rem;color:var(--muted);text-decoration:none;">← Back to portfolio</a>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════
+// DATA — Error rules with weekly counts per site
+// ══════════════════════════════════════════════════════
+const SITES = ['Paris', 'Lyon', 'Berlin', 'Warsaw', 'Madrid', 'Prague'];
+
+const ERRORS = [
+  {
+    id: 'MF01', domain: 'SCM', crit: 'Medium',
+    name: 'Missing Supplier Reference',
+    def: 'Supplier reference field is empty or invalid on active purchase orders.',
+    owner: 'Procurement / SCM team',
+    resolution: 'Complete supplier master data in ERP and resubmit affected orders.',
+    weeks: [77, 77, 82, 79, 77],
+    sites: { Paris: 28, Lyon: 22, Berlin: 14, Warsaw: 8, Madrid: 3, Prague: 2 }
+  },
+  {
+    id: 'MF04', domain: 'SCM', crit: 'Medium',
+    name: 'Incorrect Delivery Date',
+    def: 'Confirmed delivery date is inconsistent with lead time rules or in the past.',
+    owner: 'Supply Planning',
+    resolution: 'Review and update delivery dates in the planning system. Flag supplier if recurrent.',
+    weeks: [382, 249, 112, 201, 195],
+    sites: { Paris: 55, Lyon: 30, Berlin: 88, Warsaw: 102, Madrid: 22, Prague: 42 }
+  },
+  {
+    id: 'MF06', domain: 'PEX', crit: 'Medium',
+    name: 'Expedition Document Missing',
+    def: 'Outbound shipment has no associated expedition document in the system.',
+    owner: 'Logistics / PEX',
+    resolution: 'Generate expedition document before shipment confirmation. Automate check at booking.',
+    weeks: [627, 626, 624, 611, 598],
+    sites: { Paris: 210, Lyon: 145, Berlin: 98, Warsaw: 67, Madrid: 88, Prague: 78 }
+  },
+  {
+    id: 'MF09', domain: 'PEX', crit: 'High',
+    name: 'No Tracking Number Assigned',
+    def: 'Shipped parcel has no carrier tracking number linked to the sales order.',
+    owner: 'Transport Management',
+    resolution: 'Enforce mandatory tracking input at shipment creation. Alert carrier interface.',
+    weeks: [33, 33, 27, 31, 29],
+    sites: { Paris: 4, Lyon: 6, Berlin: 9, Warsaw: 7, Madrid: 2, Prague: 2 }
+  },
+  {
+    id: 'MF10', domain: 'PEX', crit: 'High',
+    name: 'Stock Discrepancy at Receipt',
+    def: 'Received quantity does not match purchase order quantity by more than 2%.',
+    owner: 'Warehouse Operations',
+    resolution: 'Trigger discrepancy workflow. Notify supplier and update inventory records.',
+    weeks: [691, 634, 636, 608, 621],
+    sites: { Paris: 120, Lyon: 98, Berlin: 145, Warsaw: 178, Madrid: 55, Prague: 40 }
+  },
+  {
+    id: 'MF12', domain: 'SCM', crit: 'Low',
+    name: 'Overdue Open Purchase Order',
+    def: 'Purchase order remains open 30+ days past confirmed delivery date with no goods receipt.',
+    owner: 'Procurement',
+    resolution: 'Contact supplier for status update. Close or reschedule order in ERP.',
+    weeks: [513, 499, 437, 488, 501],
+    sites: { Paris: 88, Lyon: 72, Berlin: 110, Warsaw: 134, Madrid: 67, Prague: 42 }
+  },
+  {
+    id: 'MF18', domain: 'SCM', crit: 'Medium',
+    name: 'Missing Safety Stock Level',
+    def: 'Material has no defined safety stock threshold in the planning parameters.',
+    owner: 'Demand Planning',
+    resolution: 'Define safety stock levels based on historical consumption and lead time variability.',
+    weeks: [937, 928, 837, 902, 888],
+    sites: { Paris: 178, Lyon: 155, Berlin: 199, Warsaw: 212, Madrid: 88, Prague: 105 }
+  },
+  {
+    id: 'MF19', domain: 'SCM', crit: 'High',
+    name: 'Critical Component with No Forecast',
+    def: 'A-class material has no demand forecast for the next 8 weeks.',
+    owner: 'Supply Planning',
+    resolution: 'Add material to forecasting cycle. Escalate to demand manager if recurring.',
+    weeks: [1203, 1075, 979, 1044, 1012],
+    sites: { Paris: 210, Lyon: 188, Berlin: 245, Warsaw: 198, Madrid: 77, Prague: 94 }
+  },
+  {
+    id: 'MF25', domain: 'SCM', crit: 'Medium',
+    name: 'Duplicate Material Master Entry',
+    def: 'Two or more active material codes refer to the same physical item.',
+    owner: 'Data Governance / MDM',
+    resolution: 'Run deduplication workflow. Merge records and update all dependent transactions.',
+    weeks: [6368, 2625, 2401, 2544, 2488],
+    sites: { Paris: 488, Lyon: 412, Berlin: 544, Warsaw: 622, Madrid: 199, Prague: 235 }
+  },
+  {
+    id: 'MF30', domain: 'PEX', crit: 'Low',
+    name: 'Return Order Without Authorization',
+    def: 'Return merchandise authorization (RMA) number is missing on customer return orders.',
+    owner: 'Customer Service / PEX',
+    resolution: 'Enforce RMA generation before accepting return. Update returns policy in ERP.',
+    weeks: [91, 86, 81, 88, 84],
+    sites: { Paris: 14, Lyon: 18, Berlin: 22, Warsaw: 11, Madrid: 8, Prague: 9 }
+  }
+];
+
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+let selectedRule = null;
+
+// ══════════════════════════════════════════════════════
+// RENDER COCKPIT TABLE
+// ══════════════════════════════════════════════════════
+function renderCockpit() {
+  const tbody = document.getElementById('cockpit-body');
+
+  const totals = [0,0,0,0,0];
+  ERRORS.forEach(e => e.weeks.forEach((v,i) => totals[i] += v));
+  const grandTotal = totals.reduce((a,b) => a+b, 0);
+
+  let html = `<tr class="grand-total">
+    <td colspan="3">Grand Total</td>
+    ${totals.map(v => `<td>${v.toLocaleString()}</td>`).join('')}
+    <td>${grandTotal.toLocaleString()}</td>
+  </tr>`;
+
+  ERRORS.forEach(err => {
+    const total = err.weeks.reduce((a,b) => a+b, 0);
+    const critClass = err.crit.toLowerCase();
+    const isSelected = selectedRule && selectedRule.errorId === err.id;
+    const rowClass = isSelected ? 'data-row selected' : 'data-row';
+
+    const cells = err.weeks.map((v, wi) => {
+      const isHighlighted = isSelected && selectedRule.weekIdx === wi;
+      const isDimmed = isSelected && selectedRule.weekIdx !== wi;
+      const cls = isHighlighted ? 'cell-val highlighted' : isDimmed ? 'cell-val dimmed' : 'cell-val';
+      return `<td><span class="${cls}" onclick="selectCell('${err.id}', ${wi})">${v.toLocaleString()}</span></td>`;
+    });
+
+    const totalCls = isSelected && selectedRule.weekIdx === null ? 'cell-val highlighted' : 'cell-val';
+
+    html += `<tr class="${rowClass}">
+      <td><strong>${err.id}</strong></td>
+      <td><span class="dom">${err.domain}</span></td>
+      <td><span class="crit ${critClass}">${err.crit}</span></td>
+      ${cells.join('')}
+      <td><span class="${totalCls}" onclick="selectCell('${err.id}', null)">${total.toLocaleString()}</span></td>
+    </tr>`;
+  });
+
+  tbody.innerHTML = html;
+}
+
+// ══════════════════════════════════════════════════════
+// RENDER SITE BARS
+// ══════════════════════════════════════════════════════
+function renderSiteBars(data) {
+  const container = document.getElementById('site-bars');
+  if (!data) {
+    container.innerHTML = '<div style="font-size:0.75rem;color:var(--muted);padding:20px 0;">Select an error type to see site breakdown.</div>';
+    return;
+  }
+
+  const maxVal = Math.max(...Object.values(data));
+  let html = '';
+  Object.entries(data)
+    .sort((a, b) => b[1] - a[1])
+    .forEach(([site, count]) => {
+      const pct = Math.round((count / maxVal) * 100);
+      const fillClass = pct > 70 ? 'bad' : pct > 40 ? 'warn' : '';
+      html += `<div class="site-row">
+        <div class="site-name">${site}</div>
+        <div class="site-bar-track">
+          <div class="site-bar-fill ${fillClass}" style="width:${pct}%"></div>
+        </div>
+        <div class="site-count">${count}</div>
+      </div>`;
+    });
+  container.innerHTML = html;
+}
+
+// ══════════════════════════════════════════════════════
+// RENDER ERROR DETAIL
+// ══════════════════════════════════════════════════════
+function renderDetail(err, weekIdx) {
+  const detail = document.getElementById('error-detail');
+  const placeholder = document.getElementById('error-placeholder');
+  const label = document.getElementById('active-filter-label');
+
+  if (!err) {
+    detail.style.display = 'none';
+    placeholder.style.display = 'flex';
+    label.textContent = 'All error types';
+    document.getElementById('reset-btn').style.display = 'none';
+    return;
+  }
+
+  const weekLabel = weekIdx !== null ? ` — Week ${weekIdx + 1}` : ' — All weeks';
+  const count = weekIdx !== null ? err.weeks[weekIdx] : err.weeks.reduce((a,b)=>a+b,0);
+
+  document.getElementById('ed-id').textContent = err.id;
+  document.getElementById('ed-crit').innerHTML = `<span class="crit ${err.crit.toLowerCase()}">${err.crit}</span>`;
+  document.getElementById('ed-name').textContent = err.name;
+  document.getElementById('ed-def').textContent = err.def;
+  document.getElementById('ed-domain').textContent = err.domain;
+  document.getElementById('ed-owner').textContent = err.owner;
+  document.getElementById('ed-resolution').textContent = err.resolution;
+
+  label.textContent = `${err.id} — ${err.name}${weekLabel} (${count.toLocaleString()} errors)`;
+  detail.style.display = 'block';
+  placeholder.style.display = 'none';
+  document.getElementById('reset-btn').style.display = 'inline-flex';
+}
+
+// ══════════════════════════════════════════════════════
+// INTERACTIONS
+// ══════════════════════════════════════════════════════
+function selectCell(errorId, weekIdx) {
+  if (selectedRule && selectedRule.errorId === errorId && selectedRule.weekIdx === weekIdx) {
+    resetFilter(); return;
+  }
+
+  selectedRule = { errorId, weekIdx };
+  const err = ERRORS.find(e => e.id === errorId);
+
+  const total = err.weeks.reduce((a,b)=>a+b,0);
+  let siteData;
+  if (weekIdx !== null) {
+    const weekTotal = err.weeks[weekIdx];
+    const ratio = total > 0 ? weekTotal / total : 1;
+    siteData = {};
+    Object.entries(err.sites).forEach(([s, v]) => {
+      siteData[s] = Math.round(v * ratio);
+    });
+  } else {
+    siteData = err.sites;
+  }
+
+  renderCockpit();
+  renderSiteBars(siteData);
+  renderDetail(err, weekIdx);
+}
+
+function resetFilter() {
+  selectedRule = null;
+  renderCockpit();
+  renderSiteBars(null);
+  renderDetail(null);
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+renderCockpit();
+renderSiteBars(null);
+renderDetail(null);
+</script>
+</body>
+</html>
